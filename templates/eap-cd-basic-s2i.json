@@ -165,6 +165,52 @@
             "kind": "Service",
             "apiVersion": "v1",
             "spec": {
+                "ports": [
+                    {
+                        "name": "mgmt",
+                        "port": 9090,
+                        "targetPort": 9090
+                    }
+                ],
+                "selector": {
+                    "deploymentConfig": "${APPLICATION_NAME}"
+                }
+            },
+            "metadata": {
+                "name": "${APPLICATION_NAME}-mgmt",
+                "labels": {
+                    "application": "${APPLICATION_NAME}"
+                },
+                "annotations": {
+                    "description": "The web server's http port."
+                }
+            }
+        },
+        {
+            "kind": "ServiceMonitor",
+            "apiVersion": "monitoring.coreos.com/v1",
+            "metadata": {
+                "name": "${APPLICATION_NAME}",
+                "labels": {
+                    "application": "${APPLICATION_NAME}",
+                    "team": "frontend"
+                }
+            },
+            "spec": {
+                "selector": {
+                    "matchLabels": {
+                        "app": "${APPLICATION_NAME}"
+                    }
+                  },
+                "endpoints": [
+                    {"port": "mgmt"}
+                ]
+            }
+        },
+        {
+            "kind": "Service",
+            "apiVersion": "v1",
+            "spec": {
                 "clusterIP": "None",
                 "ports": [
                     {
