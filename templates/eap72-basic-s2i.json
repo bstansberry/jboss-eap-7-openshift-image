@@ -95,6 +95,14 @@
             "required": true
         },
         {
+            "displayName": "ImageStream Name",
+            "description": "Name of the ImageStream for Red Hat Middleware JBoss EAP openshift images. The default value 
+'jboss-eap72-openshift' provides images using OpenJDK 8. For images using OpenJDK 11, the value should be 'jboss-eap72-jdk11-openshift'",
+            "name": "IMAGE_STREAM_NAME",
+            "value": "jboss-eap72-openshift",
+            "required": false
+        },
+        {
             "displayName": "JGroups Cluster Password",
             "description": "JGroups cluster password",
             "name": "JGROUPS_CLUSTER_PASSWORD",
